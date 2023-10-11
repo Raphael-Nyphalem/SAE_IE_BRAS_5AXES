@@ -8,8 +8,8 @@ const uint8_t R_MODE_1= 0x00;
 const uint8_t R_PRE_SCALE = 0xFE;
 
 
-const uint8_t DEFAULT_MODE1 = 0x11;  
-const uint8_t PRESCALER = 25000000/(4096*50);
+const uint8_t DEFAULT_MODE1 = 0x31;  
+const uint8_t PRESCALER = 25000000/4096/50;
 
 
 /**
@@ -46,8 +46,7 @@ void loop() {
 }
 
 void initialisation(){
-  uint8_t sleep_a_1= 0x10;
-  ecrire_sur_un_registre(R_MODE_1,sleep_a_1);
+  ecrire_sur_un_registre(R_MODE_1,DEFAULT_MODE1 | 0x10);
   ecrire_sur_un_registre(R_PRE_SCALE,PRESCALER);
   ecrire_sur_un_registre(R_MODE_1,DEFAULT_MODE1);
 }
@@ -66,28 +65,12 @@ void ecrire_sur_4_registre(uint8_t registre_n,uint8_t data[4])
   uint8_t data_OFF_L= data[2];
   uint8_t data_OFF_H= data[3]& 0x1F;
 
-
   Wire.beginTransmission(ADDRESS_PSA);
-  Wire.write(R_MODE_1);
-  Wire.write(DEFAULT_MODE1 | 0x20);
+  Wire.write(registre_n);
+  Wire.write(data_ON_L);
+  Wire.write(data_ON_H);
+  Wire.write(data_OFF_L);
+  Wire.write(data_OFF_H);
   uint8_t error =  Wire.endTransmission();
 
-  if (error == 0)
-  {
-    Wire.beginTransmission(ADDRESS_PSA);
-    Wire.write(registre_n);
-    Wire.write(data_ON_L);
-    Wire.write(data_ON_H);
-    Wire.write(data_OFF_L);
-    Wire.write(data_OFF_H);
-    error =  Wire.endTransmission();
-    if (error == 0)
-    {
-      Wire.beginTransmission(ADDRESS_PSA);
-      Wire.write(R_MODE_1);
-      Wire.write(DEFAULT_MODE1 | 0x20);
-      error =  Wire.endTransmission();
-
-    }
-  }
 }
