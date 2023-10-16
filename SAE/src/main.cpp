@@ -5,141 +5,97 @@ const uint8_t ADDRESS_PSA = 0x7F;
 
 const uint8_t R_MODE_1 = 0x00;
 const uint8_t R_PRE_SCALE = 0xFE;
-const uint8_t R_LED0_ON_L = 0x06;
 
 const uint8_t DEFAULT_MODE1 = 0x21;
 const uint8_t PRESCALER = 25000000 / 4096 / 50;
 
-const uint8_t STORAGE_ON_OFF = 4;
-const uint8_t ADRESS_MOTEUR = 5;
 
-const uint8_t MOTEUR_A = 0;
-const uint8_t MOTEUR_B = 1;
-const uint8_t MOTEUR_C = 2;
-const uint8_t MOTEUR_D = 3;
-const uint8_t MOTEUR_E = 4;
+const uint8_t LED0_OFF_L = 0x08;
+const uint8_t LED1_OFF_L = 0x0C;
+const uint8_t LED2_OFF_L = 0x10;
+const uint8_t LED3_OFF_L = 0x14;
+const uint8_t LED4_OFF_L = 0x18;
+const uint8_t LED5_OFF_L = 0x1C;
+const uint8_t LED6_OFF_L = 0x20;
+const uint8_t LED7_OFF_L = 0x24;
 
-const uint8_t MOTEUR_A_ADRESS_ON_L_0FF = 0x06;
-const uint8_t MOTEUR_A_ADRESS_ON_L_F00 = 0x07;
-const uint8_t MOTEUR_A_ADRESS_ON_H_0FF = 0x08;
-const uint8_t MOTEUR_A_ADRESS_ON_H_F00 = 0x09;
+const uint8_t LED8_OFF_L = 0x28;
+const uint8_t LED9_OFF_L = 0x2C;
+const uint8_t LED10_OFF_L = 0x30;
+const uint8_t LED11_OFF_L = 0x34;
+const uint8_t LED12_OFF_L = 0x38;
+const uint8_t LED13_OFF_L = 0x3C;
+const uint8_t LED14_OFF_L = 0x40;
+const uint8_t LED15_OFF_L = 0x44;
 
-const uint8_t MOTEUR_B_ADRESS_ON_L_0FF = 0x0A;
-const uint8_t MOTEUR_B_ADRESS_ON_L_F00 = 0x0B;
-const uint8_t MOTEUR_B_ADRESS_ON_H_0FF = 0x0C;
-const uint8_t MOTEUR_B_ADRESS_ON_H_F00 = 0x0D;
-
-const uint8_t MOTEUR_C_ADRESS_ON_L_0FF = 0x0E;
-const uint8_t MOTEUR_C_ADRESS_ON_L_F00 = 0x0F;
-const uint8_t MOTEUR_C_ADRESS_ON_H_0FF = 0x10;
-const uint8_t MOTEUR_C_ADRESS_ON_H_F00 = 0x11;
-
-const uint8_t MOTEUR_D_ADRESS_ON_L_0FF = 0x12;
-const uint8_t MOTEUR_D_ADRESS_ON_L_F00 = 0x13;
-const uint8_t MOTEUR_D_ADRESS_ON_H_0FF = 0x14;
-const uint8_t MOTEUR_D_ADRESS_ON_H_F00 = 0x14;
-
-const uint8_t MOTEUR_E_ADRESS_ON_L_0FF = 0x16;
-const uint8_t MOTEUR_E_ADRESS_ON_L_F00 = 0x17;
-const uint8_t MOTEUR_E_ADRESS_ON_H_0FF = 0x18;
-const uint8_t MOTEUR_E_ADRESS_ON_H_F00 = 0x19;
+const uint8_t MOTEUR_A = LED0_OFF_L;
+const uint8_t MOTEUR_B = LED1_OFF_L;
+const uint8_t MOTEUR_C = LED2_OFF_L;
+const uint8_t MOTEUR_D = LED3_OFF_L;
+const uint8_t MOTEUR_E = LED4_OFF_L;
 
 
+const uint8_t TAILLE =2;
+const uint8_t VECTEUR_MOTEUR =0;
+const uint8_t VECTEUR_ANGLE =1;
 
+
+uint8_t vecteur_moteur_data[TAILLE];
+uint8_t process_data_storage[TAILLE];
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  */
 void initialisation();
 
 /**
- * @brief 
- * 
- * @param registre 
- * @param data 
+ * @brief
+ *
+ * @param registre
+ * @param data
  */
-void ecrire_sur_un_registre(uint8_t registre, uint8_t data);
+void init_executeur(uint8_t registre, uint8_t data);
 
 /***/
-void ecrire_sur_4_registre(uint8_t registre_ledn_ON_L, uint8_t data[4]);
+void saisie_commande_utilisateur(uint8_t vecteur[TAILLE]);
 
-void setup() {
+uint16_t angle_to_duty_cycle_convert(uint8_t angle);
+
+void envoyer_les_donnees(uint8_t vecteur[TAILLE]);
+
+void setup()
+{
   Wire.begin();
   initialisation();
-
-  uint8_t data[4];
-  data[0] =0X00;
-  data[1] =0X00;
-  data[2] =0XFF;
-  data[3] =0X07;
-  ecrire_sur_4_registre(R_LED0_ON_L,data);
 }
 
-void loop() {
-  
+void loop()
+{
 }
 
-void initialisation(){
-  ecrire_sur_un_registre(R_MODE_1,DEFAULT_MODE1 | 0x10);
-  ecrire_sur_un_registre(R_PRE_SCALE,PRESCALER);
-  ecrire_sur_un_registre(R_MODE_1,DEFAULT_MODE1);
+void initialisation()
+{
+  init_executeur(R_MODE_1, DEFAULT_MODE1 | 0x10);
+  init_executeur(R_PRE_SCALE, PRESCALER);
+  init_executeur(R_MODE_1, DEFAULT_MODE1);  
 }
 
-void ecrire_sur_un_registre(uint8_t registre, uint8_t data){
+void init_executeur(uint8_t registre, uint8_t data)   
+{
   Wire.beginTransmission(ADDRESS_PSA);
   Wire.write(registre);
   Wire.write(data);
-  uint8_t error =  Wire.endTransmission();
+  uint8_t error = Wire.endTransmission();
 }
 
-void ecrire_sur_4_registre(uint8_t registre_ledn_ON_L,uint8_t data[4])
+void saisie_commande_utilisateur(uint8_t vecteur[TAILLE])
 {
-  uint8_t data_ON_L = data[0];
-  uint8_t data_ON_H = data[1] & 0x0F;
-  uint8_t data_OFF_L= data[2];
-  uint8_t data_OFF_H= data[3]& 0x0F;
-
-  Wire.beginTransmission(ADDRESS_PSA);
-  Wire.write(registre_ledn_ON_L);
-  Wire.write(data_ON_L);
-  Wire.write(data_ON_H);
-  Wire.write(data_OFF_L);
-  Wire.write(data_OFF_H);
-  uint8_t error =  Wire.endTransmission();
-
-}
-
-void ecrire_sur_2_registre(uint8_t registre_ledn_ON_L,);
-
-
-bool preparation_des_donnees(uint8_t num_moteur, uint16_t data_ON, uint16_t data_OFF, uint8_t data_storage[STORAGE_ON_OFF][ADRESS_MOTEUR])
-{
-  uint8_t process_data;
-  bool process_finis = false;
-
-  process_data = uint8_t((data_OFF >> 12) & 0x000F); //bit de poid fort
-  data_storage[1][num_moteur] = process_data;
-  process_data = uint8_t(data_OFF & 0x00FF); //bit de poid faible
-  data_storage[0][num_moteur] = process_data;
-
-  process_data = uint8_t((data_OFF >> 12) & 0x000F);
-  data_storage[3][num_moteur] = process_data;
-  process_data = uint8_t(data_ON & 0x00FF);
-  data_storage[2][num_moteur] = process_data;
-
-  process_finis = true;
-
-  return process_finis;
-}
-
-void utilisateur_commande_moteur(uint16_t &data_angle, uint8_t &moteur_X)
-{
+  int8_t angle_choisi;
   char choice;
-  int16_t angle_choisi;
   bool stupid_proof_flag = true;
 
-  while (stupid_proof_flag == false)
+  while (stupid_proof_flag == true)
   {
     Serial.println("choose a motor | A | B | C | D | E |, tap h for help ");
     choice = Serial.available();
@@ -147,23 +103,23 @@ void utilisateur_commande_moteur(uint16_t &data_angle, uint8_t &moteur_X)
     switch (choice)
     {
     case 'A':
-      moteur_X = MOTEUR_A;
+      vecteur[VECTEUR_MOTEUR] = MOTEUR_A;
       stupid_proof_flag = false;
       break;
     case 'B':
-      moteur_X = MOTEUR_B;
+      vecteur[VECTEUR_MOTEUR] = MOTEUR_B;
       stupid_proof_flag = false;
       break;
     case 'C':
-      moteur_X = MOTEUR_C;
+      vecteur[VECTEUR_MOTEUR] = MOTEUR_C;
       stupid_proof_flag = false;
       break;
     case 'D':
-      moteur_X = MOTEUR_D;
+      vecteur[VECTEUR_MOTEUR] = MOTEUR_D;
       stupid_proof_flag = false;
       break;
     case 'E':
-      moteur_X = MOTEUR_E;
+      vecteur[VECTEUR_MOTEUR] = MOTEUR_E;
       stupid_proof_flag = false;
       break;
     case 'h':
@@ -173,21 +129,26 @@ void utilisateur_commande_moteur(uint16_t &data_angle, uint8_t &moteur_X)
       Serial.println("motor A -> rotation of the part of the arm attach to the clamp the x axis");
       Serial.println("motor A -> opens and closes the clamp");
       break;
+    case 'H':
+      Serial.println("motor A -> rotation of the base of the arm on the z axis");
+      Serial.println("motor B -> rotation of the arm attach to the base on the x axis");
+      Serial.println("motor C -> rotation of the middle arm on the x axis");
+      Serial.println("motor A -> rotation of the part of the arm attach to the clamp the x axis");
+      Serial.println("motor A -> opens and closes the clamp");
+      break;
     default:
-      Serial.println("well,... if you can not read I can't do much for you à² _à² ");
+      Serial.println("well,... if you can not read I can't do much for you ಠ_ಠ");
       break;
     }
   }
+    stupid_proof_flag = true;
 
-  stupid_proof_flag = true;
-
-  while (stupid_proof_flag == false)
+  while (stupid_proof_flag == true)
   {
-    Serial.println("choose an between -90 and 90");
+    Serial.println("choose an angle between -90 and 90");
     angle_choisi = Serial.available();
     if ((angle_choisi >= -90) && (angle_choisi <= 90))
     {
-      data_angle = uint16_t((1.5 + (angle_choisi / 180) * 4096) / 20);
       Serial.println("choice saved");
       stupid_proof_flag = false;
     }
@@ -198,3 +159,36 @@ void utilisateur_commande_moteur(uint16_t &data_angle, uint8_t &moteur_X)
   }
 }
 
+uint16_t angle_to_duty_cycle_convert(uint8_t angle)
+{
+  uint16_t data_angle;
+
+  data_angle = uint16_t((1.5 + (angle / 180.0) * 4096) / 20);
+
+  return data_angle;
+}
+
+
+void envoyer_les_donnees(uint8_t vecteur[TAILLE])
+{
+  uint16_t dataFull;
+  uint8_t error;
+
+  uint8_t data_L;
+  uint8_t data_H;
+
+  dataFull = angle_to_duty_cycle_convert(vecteur[VECTEUR_ANGLE]);
+
+  uint16_t process_data;
+
+  process_data = dataFull >> 12 & 0x000F; // bit de poid fort
+  data_H = uint8_t(process_data);
+  process_data = dataFull & 0x00FF; // bit de poid faible
+  data_L = uint8_t(process_data);
+
+  Wire.beginTransmission(ADDRESS_PSA);
+  Wire.write(vecteur[VECTEUR_MOTEUR]);
+  Wire.write(data_L);
+  Wire.write(data_H);
+  error = Wire.endTransmission();
+}
