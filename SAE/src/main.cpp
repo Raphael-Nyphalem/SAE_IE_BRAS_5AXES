@@ -44,24 +44,40 @@ uint8_t vecteur_moteur_data[TAILLE];
 uint8_t process_data_storage[TAILLE];
 
 /**
- * @brief
+ * @brief permet l'initialisation du précalère a 50 hz
+ *  qui est l'autre de fréquance de fonctionnement des moteurs
  *
  */
 void initialisation();
 
 /**
- * @brief
+ * @brief fonction qui permet d'envoyer une donner a un registre 
  *
- * @param registre
- * @param data
+ * @param registre [E] registre que l'on soueite axéder pour ecrire une donnée
+ * @param data [E] donnée que l'on soueite écrire 
  */
 void init_executeur(uint8_t registre, uint8_t data);
 
-/***/
+/**
+ * @brief 
+ * 
+ * @param vecteur [E/S]
+ */
 void saisie_commande_utilisateur(uint8_t vecteur[TAILLE]);
 
+/**
+ * @brief 
+ * 
+ * @param angle [E]
+ * @return uint16_t [S]
+ */
 uint16_t angle_to_duty_cycle_convert(uint8_t angle);
 
+/**
+ * @brief 
+ * 
+ * @param vecteur [E]
+ */
 void envoyer_les_donnees(uint8_t vecteur[TAILLE]);
 
 void setup()
@@ -72,6 +88,9 @@ void setup()
 
 void loop()
 {
+  uint8_t vecteur[TAILLE];
+  saisie_commande_utilisateur(vecteur);
+  envoyer_les_donnees(vecteur);
 }
 
 void initialisation()
@@ -122,14 +141,7 @@ void saisie_commande_utilisateur(uint8_t vecteur[TAILLE])
       vecteur[VECTEUR_MOTEUR] = MOTEUR_E;
       stupid_proof_flag = false;
       break;
-    case 'h':
-      Serial.println("motor A -> rotation of the base of the arm on the z axis");
-      Serial.println("motor B -> rotation of the arm attach to the base on the x axis");
-      Serial.println("motor C -> rotation of the middle arm on the x axis");
-      Serial.println("motor A -> rotation of the part of the arm attach to the clamp the x axis");
-      Serial.println("motor A -> opens and closes the clamp");
-      break;
-    case 'H':
+    case ('h','H'):
       Serial.println("motor A -> rotation of the base of the arm on the z axis");
       Serial.println("motor B -> rotation of the arm attach to the base on the x axis");
       Serial.println("motor C -> rotation of the middle arm on the x axis");
@@ -149,7 +161,9 @@ void saisie_commande_utilisateur(uint8_t vecteur[TAILLE])
     angle_choisi = Serial.available();
     if ((angle_choisi >= -90) && (angle_choisi <= 90))
     {
+      vecteur[VECTEUR_ANGLE]=angle_choisi;
       Serial.println("choice saved");
+
       stupid_proof_flag = false;
     }
     else
@@ -163,7 +177,7 @@ uint16_t angle_to_duty_cycle_convert(uint8_t angle)
 {
   uint16_t data_angle;
 
-  data_angle = uint16_t((1.5 + (angle / 180.0) * 4096) / 20);
+  data_angle = uint16_t((1.5 + (angle / 180.0) ) / 20 * 4096);
 
   return data_angle;
 }
