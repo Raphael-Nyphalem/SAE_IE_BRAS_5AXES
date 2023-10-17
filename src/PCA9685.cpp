@@ -6,7 +6,7 @@ void initialisation()
   init_executeur(R_MODE_1, DEFAULT_MODE1 | SLEEP);
   init_executeur(R_PRE_SCALE, PRESCALER);
   init_executeur(R_MODE_1, DEFAULT_MODE1);
-  delayMicrosenconds(500);
+  delayMicroseconds(500);
 }
 
 void init_executeur(uint8_t registre, uint8_t data)   
