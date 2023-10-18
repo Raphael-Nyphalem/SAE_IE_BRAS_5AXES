@@ -59,8 +59,10 @@ void init_executeur(uint8_t registre, uint8_t data);
  * @brief 
  * 
  * @param vecteur [E/S]
+ * @return true 
+ * @return false 
  */
-void saisie_commande_utilisateur(uint8_t vecteur[TAILLE]);
+bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE]);
 
 /**
  * @brief 
@@ -73,6 +75,16 @@ uint16_t angle_to_duty_cycle_convert(uint8_t angle);
 /**
  * @brief 
  * 
- * @param vecteur [E]
+ * @param vecteur 
  */
 void envoyer_les_donnees(uint8_t vecteur[TAILLE]);
+
+
+/**
+ * @brief Permet la selection du mode de fonctionnement voulue
+ * 
+ * @param mode [E/S] paramètre du mode actuel de fonctionnement defaut -1 (pas de mode selectionner)
+ * @return true [S] retourne Vrais si un mode est un mode pris en compte dans le programme
+ * @return false [S] retourne Vrais si un mode est un mode  qui n'est pas pris en compte dans le programme
+ */
+bool selection_de_mode(int8_t &mode);

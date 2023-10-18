@@ -15,10 +15,17 @@ void init_executeur(uint8_t registre, uint8_t data)
   Wire.write(registre);
   Wire.write(data);
   uint8_t error = Wire.endTransmission();
+
+  if (error >=1 )
+  {
+    Serial.print("erreur d'envoie de donnée dans le fonction 'init_executeur' \nErreur : ");
+    Serial.println(error);
+  }
+  
 }
 
 
-void saisie_commande_utilisateur(uint8_t vecteur[TAILLE])
+bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE])
 {
   uint8_t angle_choisi;
   char moteur_choisi;
@@ -55,7 +62,9 @@ void saisie_commande_utilisateur(uint8_t vecteur[TAILLE])
         vecteur[VECTEUR_MOTEUR] = MOTEUR_E;
         stupid_proof_flag = false;
         break;
-      case ('h','H'):
+      
+      case 'h':
+      case 'H':
         Serial.println("motor A -> rotation of the base of the arm on the z axis");
         Serial.println("motor B -> rotation of the arm attach to the base on the x axis");
         Serial.println("motor C -> rotation of the middle arm on the x axis");
@@ -74,7 +83,7 @@ void saisie_commande_utilisateur(uint8_t vecteur[TAILLE])
       }
     }
   }
-    stupid_proof_flag = true;
+  stupid_proof_flag = true;
   
   while (stupid_proof_flag == true)
   {
@@ -129,4 +138,61 @@ void envoyer_les_donnees(uint8_t vecteur[TAILLE])
   Wire.write(data_L);
   Wire.write(data_H);
   error = Wire.endTransmission();
+
+    if (error >=1 )
+  {
+    Serial.print("erreur d'envoie de donnée dans le fonction 'envoyer_les_donnees' \nErreur : ");
+    Serial.println(error);
+  }
+}
+
+bool selection_de_mode(int8_t &mode)
+{
+  static bool flag_choix_print = true;
+  static bool flag_choix_read = false;
+  bool retourne = false;
+
+  if (mode !=1 or mode !=2)
+  {
+    mode = -1;
+    flag_choix_print=true;
+  }
+  
+
+  if (flag_choix_print)
+  {
+    Serial.println("\nVeuiller effectuer un choix de mode de fonctionnment ");
+    Serial.println("tapée 1 pour Mode 1: ");
+    Serial.println("Tapée 2 pour Mode 2: ");
+    flag_choix_print = false;
+    flag_choix_read = true;
+  }
+
+  if (Serial.available() and flag_choix_read)
+  {
+    char lue = Serial.read();
+    switch (lue)
+    {
+    case '1':
+      mode = 1;
+      flag_choix_read = false;
+      break;
+    
+    case '2':
+      mode = 2;
+      flag_choix_read = false;
+      break;
+
+    default:
+      flag_choix_print = true;
+      break;
+    }
+  }
+
+  if (mode >=1)
+  {
+    retourne =true;
+  }
+
+  return retourne;
 }
