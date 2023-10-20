@@ -18,16 +18,21 @@ void loop()
   if (mode == 1)
   {
     bool quitte_mode_1;
-    uint8_t vecteur[TAILLE];
+    bool saisie_finit = false;
+    static uint8_t vecteur_1[TAILLE];
 
-    quitte_mode_1 = saisie_commande_utilisateur(vecteur);
+    quitte_mode_1 = saisie_commande_utilisateur(vecteur_1,saisie_finit);
     if (quitte_mode_1)
     {
       mode = -1;
     }
     else
     {
-      envoyer_les_donnees(vecteur);
+      if (saisie_finit)
+      {
+        envoyer_les_donnees(vecteur_1);
+        saisie_finit = false;
+      }
     }
   }
   

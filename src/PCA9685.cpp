@@ -25,86 +25,108 @@ void init_executeur(uint8_t registre, uint8_t data)
 }
 
 
-bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE])
+
+bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE], bool &saisie_finis)
 {
   uint8_t angle_choisi;
   char moteur_choisi;
-  bool stupid_proof_flag = true;
+  static bool flag_moteur = true;
+  static bool flag_moteur_print = true;
+  static bool flag_angle = false;
+  static bool flag_angle_print = false;
 
-  Serial.println("choose a motor | A | B | C | D | E |, tap h for help ");
-  Serial.println(' ');
-  while (stupid_proof_flag == true)
+  bool quitterMode1 = false;
+
+  if (flag_moteur_print == true)
   {
-    
+    Serial.println(' ');
+    Serial.println("choose a motor | A | B | C | D | E |, tap h for help ");
+    Serial.println(' ');
+
+    flag_moteur_print = false;
+  }
+  if (flag_moteur == true)
+  { 
     if (Serial.available())
     {
       moteur_choisi = Serial.read();
       //Serial.println(moteur_choisi);
       switch (moteur_choisi)
       {
+      case 'a':
       case 'A':
         vecteur[VECTEUR_MOTEUR] = MOTEUR_A;
-        stupid_proof_flag = false;
+        
+        
+        flag_moteur = false;
+        flag_angle = true;
+        flag_angle_print = true;
         break;
+      case 'b':
       case 'B':
         vecteur[VECTEUR_MOTEUR] = MOTEUR_B;
-        stupid_proof_flag = false;
+        
+        
+        flag_moteur = false;
+        flag_angle = true;
+        flag_angle_print = true;
+        flag_angle_print = true;
         break;
+      case 'c':
       case 'C':
         vecteur[VECTEUR_MOTEUR] = MOTEUR_C;
-        stupid_proof_flag = false;
+        
+        flag_moteur = false;
+        flag_angle = true;
+        flag_angle_print = true;
         break;
+      case 'd':
       case 'D':
         vecteur[VECTEUR_MOTEUR] = MOTEUR_D;
-        stupid_proof_flag = false;
+        
+        flag_moteur = false;
+        flag_angle = true;
+        flag_angle_print = true;
         break;
+      case 'e':
       case 'E':
         vecteur[VECTEUR_MOTEUR] = MOTEUR_E;
-        stupid_proof_flag = false;
+        
+        flag_moteur = false;
+        flag_angle = true;
+        flag_angle_print = true;
         break;
-      
       case 'h':
       case 'H':
+        Serial.println(' ');
         Serial.println("motor A -> rotation of the base of the arm on the z axis");
         Serial.println("motor B -> rotation of the arm attach to the base on the x axis");
         Serial.println("motor C -> rotation of the middle arm on the x axis");
         Serial.println("motor A -> rotation of the part of the arm attach to the clamp the x axis");
         Serial.println("motor A -> opens and closes the clamp");
         Serial.println(' ');
-        Serial.println("choose a motor | A | B | C | D | E |, tap h for help ");
+        Serial.println("press Q for return to mode selection");
+        
+        flag_moteur_print = true;
+        break;
+      case 'q':
+      case 'Q':
         Serial.println(' ');
+        Serial.println("returning to mode selection . . .");
+        Serial.println(' ');
+        quitterMode1 = true;
+        flag_moteur = false;
         break;
       default:
+        Serial.println(' ');
         Serial.println("well,... if you can not read I can't do much for you ಠ_ಠ");
         Serial.println(' ');
-        Serial.println("choose a motor | A | B | C | D | E |, tap h for help ");
-        Serial.println(' ');
+
+        flag_moteur_print = true;
         break;
       }
     }
   }
-  stupid_proof_flag = true;
-  
-  while (stupid_proof_flag == true)
-  {
-    if (Serial.available())
-    {
-      Serial.println("choose an angle between 0 and 180");
-      angle_choisi = Serial.readStringUntil('\n').toInt();
-      if (angle_choisi<=180)
-      {
-        vecteur[VECTEUR_ANGLE]=angle_choisi;
-        Serial.println("choice saved");
-
-        stupid_proof_flag = false;
-      }
-      else
-      {
-        Serial.println("[ERROR] - out of bounds");
-      }
-    }
-  }
-}
 
 uint16_t angle_to_duty_cycle_convert(uint8_t angle)
 {

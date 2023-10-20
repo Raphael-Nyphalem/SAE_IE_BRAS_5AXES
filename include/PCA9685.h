@@ -58,11 +58,12 @@ void init_executeur(uint8_t registre, uint8_t data);
 /**
  * @brief 
  * 
- * @param vecteur [E/S]
+ * @param vecteur 
+ * @param saisie_finis 
  * @return true 
  * @return false 
  */
-bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE]);
+bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE],bool &saisie_finis);
 
 /**
  * @brief 
