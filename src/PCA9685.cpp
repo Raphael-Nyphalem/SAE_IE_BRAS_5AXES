@@ -4,8 +4,9 @@
 void initialisation()
 {
   init_executeur(R_MODE_1, DEFAULT_MODE1 | SLEEP);
+  init_executeur(R_MODE_1, DEFAULT_MODE1 | SLEEP | EXT_CLK);
   init_executeur(R_PRE_SCALE, PRESCALER);
-  init_executeur(R_MODE_1, DEFAULT_MODE1);
+  init_executeur(R_MODE_1, DEFAULT_MODE1 | EXT_CLK);
   delayMicroseconds(500);
 }
 
@@ -68,7 +69,6 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR], bool &saisie_f
         flag_moteur = false;
         flag_angle = true;
         flag_angle_print = true;
-        flag_angle_print = true;
         break;
       case 'c':
       case 'C':
@@ -125,7 +125,7 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR], bool &saisie_f
       }
     }
   }
-    if (flag_angle_print = true)
+    if (flag_angle_print == true)
   {
   Serial.println(' ');
   Serial.println("choose an angle between 0 and 180");
@@ -155,6 +155,14 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR], bool &saisie_f
         flag_angle_print = true;
       }
     }
+    if (saisie_finis == true)
+    {
+      bool flag_moteur = true;
+      bool flag_moteur_print = true;
+      bool flag_angle = false;
+      bool flag_angle_print = false;
+    }
+    
   }
   return quitterMode1;
 }
@@ -167,6 +175,8 @@ void envoyer_les_donnees(uint8_t vecteur[TAILLE_VECTEUR])
 
   uint8_t data_L;
   uint8_t data_H;
+
+  uint16_t process_data;
 
   dataFull = uint16_t((1+ (vecteur[VECTEUR_ANGLE] / 180.0) ) / 20 * 4096);
 

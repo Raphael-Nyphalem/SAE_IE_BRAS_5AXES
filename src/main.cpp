@@ -39,7 +39,7 @@ void loop()
   if(mode ==2)
   {
     bool quitte_mode_2;
-    uint8_t vecteur_2[TAILLE_VECTEUR];
+    static uint8_t vecteur_2[TAILLE_VECTEUR];
 
     if (quitte_mode_2)
     {

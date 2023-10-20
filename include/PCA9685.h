@@ -9,6 +9,7 @@ const uint8_t R_PRE_SCALE = 0xFE;
 const uint8_t DEFAULT_MODE1 = 0x21;
 const uint8_t PRESCALER = 25000000 / 4096 / 50 - 1;
 const uint8_t SLEEP = 0x10;
+const uint8_t EXT_CLK = 1<<6;
 
 
 const uint8_t LED0_OFF_L = 0x08;
