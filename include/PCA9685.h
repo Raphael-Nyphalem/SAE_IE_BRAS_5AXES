@@ -36,9 +36,11 @@ const uint8_t MOTEUR_D = LED3_OFF_L;
 const uint8_t MOTEUR_E = LED4_OFF_L;
 
 
-const uint8_t TAILLE =2;
+const uint8_t TAILLE_VECTEUR =2;
 const uint8_t VECTEUR_MOTEUR =0;
 const uint8_t VECTEUR_ANGLE =1;
+
+const uint8_t TAILLE_TABLEAU=5;
 
 /**
  * @brief permet l'initialisation du prescalere pour update rate a 50 hz
@@ -63,7 +65,7 @@ void init_executeur(uint8_t registre, uint8_t data);
  * @return true 
  * @return false 
  */
-bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE],bool &saisie_finis);
+bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR],bool &saisie_finis);
 
 
 /**
@@ -71,7 +73,7 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE],bool &saisie_finis);
  * 
  * @param vecteur 
  */
-void envoyer_les_donnees(uint8_t vecteur[TAILLE]);
+void envoyer_les_donnees(uint8_t vecteur[TAILLE_VECTEUR]);
 
 
 /**

@@ -25,7 +25,7 @@ void init_executeur(uint8_t registre, uint8_t data)
 }
 
 
-bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE], bool &saisie_finis)
+bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR], bool &saisie_finis)
 {
   uint8_t angle_choisi;
   char moteur_choisi;
@@ -128,8 +128,7 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE], bool &saisie_finis)
 }
 
 
-
-void envoyer_les_donnees(uint8_t vecteur[TAILLE])
+void envoyer_les_donnees(uint8_t vecteur[TAILLE_VECTEUR])
 {
   uint16_t dataFull;
   uint8_t error;
@@ -159,17 +158,25 @@ void envoyer_les_donnees(uint8_t vecteur[TAILLE])
   }
 }
 
+void envoyer_N_donnee(uint8_t tableau[][TAILLE_VECTEUR])
+{
+
+}
+
 bool selection_de_mode(int8_t &mode)
 {
   static bool flag_choix_print = true;
   static bool flag_choix_read = false;
   bool retourne = false;
 
-  if (mode !=1 or mode !=2)
+  if (mode == 1 or mode == 2)
+  {}
+  else
   {
     mode = -1;
     flag_choix_print=true;
   }
+  
   
 
   if (flag_choix_print)

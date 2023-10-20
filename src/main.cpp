@@ -19,7 +19,7 @@ void loop()
   {
     bool quitte_mode_1;
     bool saisie_finit = false;
-    static uint8_t vecteur_1[TAILLE];
+    static uint8_t vecteur_1[TAILLE_VECTEUR];
 
     quitte_mode_1 = saisie_commande_utilisateur(vecteur_1,saisie_finit);
     if (quitte_mode_1)
@@ -39,7 +39,7 @@ void loop()
   if(mode ==2)
   {
     bool quitte_mode_2;
-    uint8_t vecteur_2[TAILLE];
+    uint8_t vecteur_2[TAILLE_VECTEUR];
 
     if (quitte_mode_2)
     {
