@@ -49,7 +49,6 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE], bool &saisie_finis)
     if (Serial.available())
     {
       moteur_choisi = Serial.read();
-      //Serial.println(moteur_choisi);
       switch (moteur_choisi)
       {
       case 'a':

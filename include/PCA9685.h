@@ -41,18 +41,18 @@ const uint8_t VECTEUR_MOTEUR =0;
 const uint8_t VECTEUR_ANGLE =1;
 
 /**
- * @brief permet l'initialisation du précalère a 50 hz
+ * @brief permet l'initialisation du prescalere pour update rate a 50 hz
  *  qui est notre de fréquance de fonctionnement des moteurs
  *
  */
 void initialisation();
 
-/**
- * @brief fonction qui permet d'envoyer une donner a un registre 
- *
- * @param registre [E] registre que l'on soueite axéder pour ecrire une donnée
- * @param data [E] donnée que l'on soueite écrire 
- */
+/** 
+* @brief fonction qui permet d'envoyer une donner à un registre  
+* 
+* @param registre [E] registre que l'on souhaite axée pour écrire une donnée 
+* @param data [E] donnée que l'on souhaite écrire  
+*/ 
 void init_executeur(uint8_t registre, uint8_t data);
 
 /**

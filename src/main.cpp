@@ -39,7 +39,7 @@ void loop()
   if(mode ==2)
   {
     bool quitte_mode_2;
-    uint8_t vecteur[TAILLE];
+    uint8_t vecteur_2[TAILLE];
 
     if (quitte_mode_2)
     {
@@ -47,7 +47,7 @@ void loop()
     }
     else
     {
-      envoyer_les_donnees(vecteur);
+      envoyer_les_donnees(vecteur_2);
     }
  
   }
