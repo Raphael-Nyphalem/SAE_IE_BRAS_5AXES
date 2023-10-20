@@ -127,14 +127,6 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE], bool &saisie_finis)
   }
 }
 
-uint16_t angle_to_duty_cycle_convert(uint8_t angle)
-{
-  uint16_t data_angle;
-
-  data_angle = uint16_t((1+ (angle / 180.0) ) / 20 * 4096);
-
-  return data_angle;
-}
 
 
 void envoyer_les_donnees(uint8_t vecteur[TAILLE])
@@ -145,7 +137,7 @@ void envoyer_les_donnees(uint8_t vecteur[TAILLE])
   uint8_t data_L;
   uint8_t data_H;
 
-  dataFull = angle_to_duty_cycle_convert(vecteur[VECTEUR_ANGLE]);
+  dataFull = uint16_t((1+ (vecteur[VECTEUR_ANGLE] / 180.0) ) / 20 * 4096);
 
   uint16_t process_data;
 

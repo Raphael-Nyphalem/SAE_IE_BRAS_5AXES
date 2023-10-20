@@ -65,14 +65,6 @@ void init_executeur(uint8_t registre, uint8_t data);
  */
 bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE],bool &saisie_finis);
 
-/**
- * @brief Convertie un angle (de 0 a 180) en un nombre de 204 a 409, representant 5% a 10% de la plage total
- * a un prescalère de pour 50 hz 5% - 10% represente un Ton a 1 - 2 ms
- * 
- * @param angle [E] angle en degré de 0 a 180 
- * @return uint16_t [S] nombre sur 2 octets entre 204 et 409
- */
-uint16_t angle_to_duty_cycle_convert(uint8_t angle);
 
 /**
  * @brief 
