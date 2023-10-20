@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-const uint8_t ADDRESS_PSA = 0x7F;
+const uint8_t ADDRESS_PCA = 0x7F;
 
 const uint8_t R_MODE_1 = 0x00;
 const uint8_t R_PRE_SCALE = 0xFE;

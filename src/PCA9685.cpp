@@ -11,7 +11,7 @@ void initialisation()
 
 void init_executeur(uint8_t registre, uint8_t data)   
 {
-  Wire.beginTransmission(ADDRESS_PSA);
+  Wire.beginTransmission(ADDRESS_PCA);
   Wire.write(registre);
   Wire.write(data);
   uint8_t error = Wire.endTransmission();
@@ -155,7 +155,7 @@ void envoyer_les_donnees(uint8_t vecteur[TAILLE])
   process_data = dataFull & 0x00FF; // bit de poid faible
   data_L = uint8_t(process_data);
 
-  Wire.beginTransmission(ADDRESS_PSA);
+  Wire.beginTransmission(ADDRESS_PCA);
   Wire.write(vecteur[VECTEUR_MOTEUR]);
   Wire.write(data_L);
   Wire.write(data_H);
