@@ -12,6 +12,17 @@ void setup()
 
 void loop()
 {
+  bool test;
+  static bool saisi_test = false;
+  static uint8_t vecteur_test[2] ;
+
+  test = saisie_commande_utilisateur(vecteur_test,saisi_test);
+  if (saisi_test == true)
+  {
+    envoyer_les_donnees(vecteur_test);
+    saisi_test = false;
+  }
+  /*
   static int8_t mode =-1;
   selection_de_mode(mode);
 
@@ -51,4 +62,5 @@ void loop()
     }
  
   }
+  */
 }
