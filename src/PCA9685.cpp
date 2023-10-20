@@ -125,6 +125,38 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR], bool &saisie_f
       }
     }
   }
+    if (flag_angle_print = true)
+  {
+  Serial.println(' ');
+  Serial.println("choose an angle between 0 and 180");
+  Serial.println(' ');
+
+  flag_angle_print = false;
+  }
+  if ((flag_angle == true) && (quitterMode1 == false))
+  {
+    if (Serial.available())
+    {
+      angle_choisi = Serial.readStringUntil('\n').toInt();
+      if (angle_choisi<=180)
+      {
+        vecteur[VECTEUR_ANGLE]=angle_choisi;
+        Serial.println(' ');
+        Serial.println("choice saved");
+
+        flag_angle = false;
+        saisie_finis = true;
+      }
+      else
+      {
+        Serial.println(' ');
+        Serial.println("[ERROR] - out of bounds");
+
+        flag_angle_print = true;
+      }
+    }
+  }
+  return quitterMode1;
 }
 
 
