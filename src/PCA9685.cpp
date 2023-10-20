@@ -25,7 +25,6 @@ void init_executeur(uint8_t registre, uint8_t data)
 }
 
 
-
 bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE], bool &saisie_finis)
 {
   uint8_t angle_choisi;
