@@ -127,6 +127,7 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE], bool &saisie_finis)
       }
     }
   }
+}
 
 uint16_t angle_to_duty_cycle_convert(uint8_t angle)
 {
