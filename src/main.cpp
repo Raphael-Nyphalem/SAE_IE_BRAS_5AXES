@@ -12,27 +12,27 @@ void setup()
 
 void loop()
 {
+  /*
   bool test;
   static bool saisi_test = false;
-  static uint8_t vecteur_test[2] ;
+  static pca9685 moteur;
 
-  test = saisie_commande_utilisateur(vecteur_test,saisi_test);
+  test = saisie_commande_utilisateur(moteur,saisi_test);
   if (saisi_test == true)
   {
-    envoyer_les_donnees(vecteur_test);
+    envoyer_les_donnees(moteur);
     saisi_test = false;
-  }
-  /*
+  }*/
   static int8_t mode =-1;
   selection_de_mode(mode);
 
   if (mode == 1)
   {
     bool quitte_mode_1;
-    bool saisie_finit = false;
-    static uint8_t vecteur_1[TAILLE_VECTEUR];
+    static bool saisie_finit = false;
+    static pca9685 moteur_1;
 
-    quitte_mode_1 = saisie_commande_utilisateur(vecteur_1,saisie_finit);
+    quitte_mode_1 = saisie_commande_utilisateur(moteur_1,saisie_finit);
     if (quitte_mode_1)
     {
       mode = -1;
@@ -41,7 +41,7 @@ void loop()
     {
       if (saisie_finit)
       {
-        envoyer_les_donnees(vecteur_1);
+        envoyer_les_donnees(moteur_1);
         saisie_finit = false;
       }
     }
@@ -50,7 +50,7 @@ void loop()
   if(mode ==2)
   {
     bool quitte_mode_2;
-    static uint8_t vecteur_2[TAILLE_VECTEUR];
+    static pca9685 moteur_2;
 
     if (quitte_mode_2)
     {
@@ -58,9 +58,8 @@ void loop()
     }
     else
     {
-      envoyer_les_donnees(vecteur_2);
+      envoyer_les_donnees(moteur_2);
     }
  
   }
-  */
 }

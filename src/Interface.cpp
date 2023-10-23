@@ -2,7 +2,7 @@
 
 bool saisie_commande_utilisateur(pca9685 moteur, bool &saisie_finis)
 {
-  uint8_t angle_choisi;
+  int8_t angle_choisi;
   char moteur_choisi;
   static bool flag_moteur = true;
   static bool flag_moteur_print = true;
@@ -112,7 +112,7 @@ bool saisie_commande_utilisateur(pca9685 moteur, bool &saisie_finis)
     if (Serial.available())
     {
       angle_choisi = Serial.readStringUntil('\n').toInt();
-      if (angle_choisi<=180)
+      if ((angle_choisi >= -90) && (angle_choisi<=90))
       {
         moteur.angle=angle_choisi;
         Serial.println(' ');
@@ -154,8 +154,6 @@ bool selection_de_mode(int8_t &mode)
     mode = -1;
     flag_choix_print=true;
   }
-  
-  
 
   if (flag_choix_print)
   {
