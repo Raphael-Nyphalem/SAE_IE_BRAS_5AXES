@@ -131,10 +131,10 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR], bool &saisie_f
     }
     if (saisie_finis == true)
     {
-      bool flag_moteur = true;
-      bool flag_moteur_print = true;
-      bool flag_angle = false;
-      bool flag_angle_print = false;
+      flag_moteur = true;
+      flag_moteur_print = true;
+      flag_angle = false;
+      flag_angle_print = false;
     }
     
   }

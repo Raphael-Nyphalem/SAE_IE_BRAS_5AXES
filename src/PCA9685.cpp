@@ -38,8 +38,6 @@ void envoyer_les_donnees(uint8_t vecteur[TAILLE_VECTEUR])
 
   dataFull = uint16_t((1+ (vecteur[VECTEUR_ANGLE] / 180.0) ) / 20 * 4096);
 
-  uint16_t process_data;
-
   process_data = dataFull >> 8 & 0x000F; // bit de poid fort
   data_H = uint8_t(process_data);
   process_data = dataFull & 0x00FF; // bit de poid faible
