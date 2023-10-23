@@ -37,6 +37,7 @@ const uint8_t MOTEUR_D = LED3_OFF_L;
 const uint8_t MOTEUR_E = LED4_OFF_L;
 
 
+
 struct pca9685
 {
   uint8_t adresse;
@@ -64,6 +65,6 @@ void init_executeur(uint8_t registre, uint8_t data);
  * 
  * @param vecteur 
  */
-void envoyer_les_donnees(pca9685 moteur);
+void mode1_envoie_de_donnees(pca9685 moteur);
 
 

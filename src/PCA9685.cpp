@@ -26,7 +26,7 @@ void init_executeur(uint8_t registre, uint8_t data)
 }
 
 
-void envoyer_les_donnees(pca9685 moteur)
+void mode1_envoie_de_donnees(pca9685 moteur)
 {
   uint16_t dataFull;
   uint8_t error;
@@ -36,7 +36,7 @@ void envoyer_les_donnees(pca9685 moteur)
 
   uint16_t process_data;
 
-  dataFull = uint16_t((1.5+ (moteur.angle / 180.0) ) / 20 * 4096);
+  dataFull = uint16_t(( 1.5+ (moteur.angle / 180.0) ) / 20 * 4096);
 
   process_data = dataFull >> 8 & 0x000F; // bit de poid fort
   data_H = uint8_t(process_data);

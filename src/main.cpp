@@ -20,7 +20,7 @@ void loop()
   test = saisie_commande_utilisateur(moteur,saisi_test);
   if (saisi_test == true)
   {
-    envoyer_les_donnees(moteur);
+    mode1_envoie_de_donnees(moteur);
     saisi_test = false;
   }*/
   static int8_t mode =-1;
@@ -41,7 +41,7 @@ void loop()
     {
       if (saisie_finit)
       {
-        envoyer_les_donnees(moteur_1);
+        mode1_envoie_de_donnees(moteur_1);
         saisie_finit = false;
       }
     }
@@ -58,7 +58,7 @@ void loop()
     }
     else
     {
-      envoyer_les_donnees(moteur_2);
+      mode1_envoie_de_donnees(moteur_2);
     }
  
   }
