@@ -1,6 +1,6 @@
 #include "Interface.h"
 
-bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR], bool &saisie_finis)
+bool saisie_commande_utilisateur(pca9685 moteur, bool &saisie_finis)
 {
   uint8_t angle_choisi;
   char moteur_choisi;
@@ -28,7 +28,7 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR], bool &saisie_f
       {
       case 'a':
       case 'A':
-        vecteur[VECTEUR_MOTEUR] = MOTEUR_A;
+        moteur.adresse = MOTEUR_A;
         
         
         flag_moteur = false;
@@ -37,7 +37,7 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR], bool &saisie_f
         break;
       case 'b':
       case 'B':
-        vecteur[VECTEUR_MOTEUR] = MOTEUR_B;
+        moteur.adresse = MOTEUR_B;
         
         
         flag_moteur = false;
@@ -46,7 +46,7 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR], bool &saisie_f
         break;
       case 'c':
       case 'C':
-        vecteur[VECTEUR_MOTEUR] = MOTEUR_C;
+        moteur.adresse = MOTEUR_C;
         
         flag_moteur = false;
         flag_angle = true;
@@ -54,7 +54,7 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR], bool &saisie_f
         break;
       case 'd':
       case 'D':
-        vecteur[VECTEUR_MOTEUR] = MOTEUR_D;
+        moteur.adresse = MOTEUR_D;
         
         flag_moteur = false;
         flag_angle = true;
@@ -62,7 +62,7 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR], bool &saisie_f
         break;
       case 'e':
       case 'E':
-        vecteur[VECTEUR_MOTEUR] = MOTEUR_E;
+        moteur.adresse = MOTEUR_E;
         
         flag_moteur = false;
         flag_angle = true;
@@ -114,7 +114,7 @@ bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR], bool &saisie_f
       angle_choisi = Serial.readStringUntil('\n').toInt();
       if (angle_choisi<=180)
       {
-        vecteur[VECTEUR_ANGLE]=angle_choisi;
+        moteur.angle=angle_choisi;
         Serial.println(' ');
         Serial.println("choice saved");
 

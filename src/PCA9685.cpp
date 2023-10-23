@@ -26,7 +26,7 @@ void init_executeur(uint8_t registre, uint8_t data)
 }
 
 
-void envoyer_les_donnees(uint8_t vecteur[TAILLE_VECTEUR])
+void envoyer_les_donnees(pca9685 moteur)
 {
   uint16_t dataFull;
   uint8_t error;
@@ -36,7 +36,7 @@ void envoyer_les_donnees(uint8_t vecteur[TAILLE_VECTEUR])
 
   uint16_t process_data;
 
-  dataFull = uint16_t((1+ (vecteur[VECTEUR_ANGLE] / 180.0) ) / 20 * 4096);
+  dataFull = uint16_t((1+ (moteur.angle / 180.0) ) / 20 * 4096);
 
   process_data = dataFull >> 8 & 0x000F; // bit de poid fort
   data_H = uint8_t(process_data);
@@ -44,7 +44,7 @@ void envoyer_les_donnees(uint8_t vecteur[TAILLE_VECTEUR])
   data_L = uint8_t(process_data);
 
   Wire.beginTransmission(ADDRESS_PCA);
-  Wire.write(vecteur[VECTEUR_MOTEUR]);
+  Wire.write(moteur.adresse);
   Wire.write(data_L);
   Wire.write(data_H);
   error = Wire.endTransmission();
@@ -56,7 +56,7 @@ void envoyer_les_donnees(uint8_t vecteur[TAILLE_VECTEUR])
   }
 }
 
-void envoyer_N_donnee(uint8_t tableau[][TAILLE_VECTEUR])
+void envoyer_N_donnee(pca9685 tableau[])
 {
 
 }

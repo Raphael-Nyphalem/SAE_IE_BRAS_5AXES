@@ -8,7 +8,7 @@
  * @return true 
  * @return false 
  */
-bool saisie_commande_utilisateur(uint8_t vecteur[TAILLE_VECTEUR],bool &saisie_finis);
+bool saisie_commande_utilisateur(pca9685 moteur,bool &saisie_finis);
 
 /**
  * @brief Permet la selection du mode de fonctionnement voulue

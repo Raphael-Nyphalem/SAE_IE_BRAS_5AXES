@@ -37,11 +37,11 @@ const uint8_t MOTEUR_D = LED3_OFF_L;
 const uint8_t MOTEUR_E = LED4_OFF_L;
 
 
-const uint8_t TAILLE_VECTEUR =2;
-const uint8_t VECTEUR_MOTEUR =0;
-const uint8_t VECTEUR_ANGLE =1;
-
-const uint8_t TAILLE_TABLEAU=5;
+struct pca9685
+{
+  uint8_t adresse;
+  int8_t angle;
+};
 
 /**
  * @brief permet l'initialisation du prescalere pour update rate a 50 hz
@@ -64,6 +64,6 @@ void init_executeur(uint8_t registre, uint8_t data);
  * 
  * @param vecteur 
  */
-void envoyer_les_donnees(uint8_t vecteur[TAILLE_VECTEUR]);
+void envoyer_les_donnees(pca9685 moteur);
 
 
