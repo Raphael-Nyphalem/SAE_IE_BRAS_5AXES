@@ -156,7 +156,7 @@ bool selection_de_mode(int8_t &mode)
   {
     Serial.println("\nVeuiller effectuer un choix de mode de fonctionnment ");
     Serial.println("tapée 1 pour Mode 1: ");
-    Serial.println("Tapée 2 pour Mode 2: "\n);
+    Serial.println("Tapée 2 pour Mode 2: \n");
     flag_choix_print = false;
     flag_choix_read = true;
   }
