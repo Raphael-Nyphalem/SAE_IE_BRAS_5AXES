@@ -36,7 +36,16 @@ const uint8_t MOTEUR_C = LED2_OFF_L;
 const uint8_t MOTEUR_D = LED3_OFF_L;
 const uint8_t MOTEUR_E = LED4_OFF_L;
 
-
+const int8_t ANGLE_MAX_MOTEUR_A =  90;
+const int8_t ANGLE_MIN_MOTEUR_A = -90;
+const int8_t ANGLE_MAX_MOTEUR_B =  90;
+const int8_t ANGLE_MIN_MOTEUR_B = -50;
+const int8_t ANGLE_MAX_MOTEUR_C =  90;
+const int8_t ANGLE_MIN_MOTEUR_C = -90;
+const int8_t ANGLE_MAX_MOTEUR_D =  90;
+const int8_t ANGLE_MIN_MOTEUR_D = -90;
+const int8_t ANGLE_MAX_MOTEUR_E =  90; //pince ouverte
+const int8_t ANGLE_MIN_MOTEUR_E = -90; //pince fermet
 
 struct pca9685
 {
