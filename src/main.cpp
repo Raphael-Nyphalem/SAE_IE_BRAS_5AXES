@@ -8,6 +8,7 @@ void setup()
   Serial.setTimeout(UINT16_MAX);
 
   initialisation();
+  
 }
 
 void loop()

@@ -72,8 +72,8 @@ bool saisie_commande_utilisateur(pca9685 &moteur, bool &saisie_finis)
         Serial.println("\nmotor A -> rotation of the base of the arm on the z axis");
         Serial.println("motor B -> rotation of the arm attach to the base on the x axis");
         Serial.println("motor C -> rotation of the middle arm on the x axis");
-        Serial.println("motor A -> rotation of the part of the arm attach to the clamp the x axis");
-        Serial.println("motor A -> opens and closes the clamp");
+        Serial.println("motor D -> rotation of the part of the arm attach to the clamp the x axis");
+        Serial.println("motor E -> opens and closes the clamp");
         Serial.println("\npress Q for return to mode selection");
  
         flag_moteur_print = true;
@@ -204,5 +204,4 @@ void mode2_hardcoded_sequence()
   moteurD.adresse = MOTEUR_D;
   moteurE.adresse = MOTEUR_E;
 
-  
 }

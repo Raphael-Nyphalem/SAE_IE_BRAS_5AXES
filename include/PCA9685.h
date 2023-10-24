@@ -63,8 +63,10 @@ void init_executeur(uint8_t registre, uint8_t data);
 /**
  * @brief 
  * 
- * @param vecteur 
+ * @param moteur 
  */
 void mode1_envoie_de_donnees(pca9685 moteur);
+
+void envoi_n_donnee(pca9685 tableau_data[], uint8_t n);
 
 
