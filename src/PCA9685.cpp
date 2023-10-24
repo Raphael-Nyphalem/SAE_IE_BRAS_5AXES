@@ -59,21 +59,17 @@ void mode1_envoie_de_donnees(pca9685 moteur)
   */
 }
 
-void envoi_n_donnee(pca9685 tableau_data[], uint8_t n)
+void envoi_n_donnee(uint8_t tableau_data[], uint8_t n)
 {
+  // processe des donné
   uint16_t dataFull;
-  uint8_t error;
-
-  uint8_t data_L;
-  uint8_t data_H;
-
   uint16_t process_data;
 
   uint8_t data_processe[n][2];
 
   for (uint8_t i = 0; i < n; i++)
   {
-    dataFull = uint16_t(( 1.5+ (tableau_data[i].angle/ 180.0) ) / 20 * 4096);
+    dataFull = uint16_t(( 1.5+ (tableau_data[i]/ 180.0) ) / 20 * 4096);
 
     process_data = dataFull >> 8 & 0x000F; // bit de poid fort
     data_processe[i][0] = uint8_t(process_data);
@@ -81,9 +77,9 @@ void envoi_n_donnee(pca9685 tableau_data[], uint8_t n)
     data_processe[i][1] = uint8_t(process_data);
   }
 
-
+  // envoie des donnée
   Wire.beginTransmission(ADDRESS_PCA);
-  Wire.write(tableau_data[0].adresse - 2);
+  Wire.write(MOTEUR_A - 2);
 
   for (uint8_t i = 0; i < n; i++)
   {
@@ -92,6 +88,6 @@ void envoi_n_donnee(pca9685 tableau_data[], uint8_t n)
     Wire.write(data_processe[i][0]);
     Wire.write(data_processe[i][1]);
   }
-  error = Wire.endTransmission();
+  Wire.endTransmission();
 
 }
