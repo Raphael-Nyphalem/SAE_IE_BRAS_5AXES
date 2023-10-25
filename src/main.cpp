@@ -51,16 +51,19 @@ void loop()
   if(mode ==2)
   {
     bool quitte_mode_2;
-    static pca9685 moteur_2;
+    static int8_t sequance = -1;
+    quitte_mode_2 = selection_de_sequence(sequance);
+
+    if (sequance > 0)
+    {
+      quitte_mode_2 = mode2_hardcoded_sequence( sequance );
+    }
 
     if (quitte_mode_2)
     {
+      sequance = -1;
       mode =-1;
     }
-    else
-    {
-      mode1_envoie_de_donnees(moteur_2);
-    }
- 
+    
   }
 }

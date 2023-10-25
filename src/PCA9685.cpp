@@ -1,6 +1,5 @@
 #include "PCA9685.h"
 
-
 void initialisation()
 {
   init_executeur(R_MODE_1, DEFAULT_MODE1 | SLEEP);
@@ -10,22 +9,21 @@ void initialisation()
   delayMicroseconds(500);
 }
 
-void init_executeur(uint8_t registre, uint8_t data)   
+void init_executeur(uint8_t registre, uint8_t data)
 {
   Wire.beginTransmission(ADDRESS_PCA);
   Wire.write(registre);
   Wire.write(data);
   uint8_t error = Wire.endTransmission();
 
-    /*Eviter de traiter les erreur ici, le mieu c'est de le remonter en return
-  if (error >=1 )
-  {
-    Serial.print("erreur d'envoie de donnée dans le fonction 'init_executeur' \nErreur : ");
-    Serial.println(error);
-  }
-  */
+  /*Eviter de traiter les erreur ici, le mieu c'est de le remonter en return
+if (error >=1 )
+{
+  Serial.print("erreur d'envoie de donnée dans le fonction 'init_executeur' \nErreur : ");
+  Serial.println(error);
 }
-
+*/
+}
 
 void mode1_envoie_de_donnees(pca9685 moteur)
 {
@@ -37,7 +35,7 @@ void mode1_envoie_de_donnees(pca9685 moteur)
 
   uint16_t process_data;
 
-  dataFull = uint16_t(( 1.5+ (moteur.angle / 180.0) ) / 20 * 4096);
+  dataFull = uint16_t((1.5 + (moteur.angle / 180.0)) / 20 * 4096);
 
   process_data = dataFull >> 8 & 0x000F; // bit de poid fort
   data_H = uint8_t(process_data);
@@ -59,7 +57,7 @@ void mode1_envoie_de_donnees(pca9685 moteur)
   */
 }
 
-void envoi_n_donnee(uint8_t tableau_data[], uint8_t n)
+void envoi_n_donnee(int8_t tableau_data[], uint8_t n)
 {
   // processe des donné
   uint16_t dataFull;
@@ -69,7 +67,7 @@ void envoi_n_donnee(uint8_t tableau_data[], uint8_t n)
 
   for (uint8_t i = 0; i < n; i++)
   {
-    dataFull = uint16_t(( 1.5+ (tableau_data[i]/ 180.0) ) / 20 * 4096);
+    dataFull = uint16_t((1.5 + (tableau_data[i] / 180.0)) / 20 * 4096);
 
     process_data = dataFull >> 8 & 0x000F; // bit de poid fort
     data_processe[i][0] = uint8_t(process_data);
@@ -79,15 +77,14 @@ void envoi_n_donnee(uint8_t tableau_data[], uint8_t n)
 
   // envoie des donnée
   Wire.beginTransmission(ADDRESS_PCA);
-  Wire.write(MOTEUR_A - 2);
+  Wire.write(LED0_OFF_L);
 
   for (uint8_t i = 0; i < n; i++)
   {
-    Wire.write(0x00);
-    Wire.write(0x00);
-    Wire.write(data_processe[i][0]);
     Wire.write(data_processe[i][1]);
+    Wire.write(data_processe[i][0]);
+    Wire.write(0x00);
+    Wire.write(0x00);
   }
   Wire.endTransmission();
-
 }

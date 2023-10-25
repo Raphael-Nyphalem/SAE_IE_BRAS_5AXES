@@ -9,8 +9,7 @@ const uint8_t R_PRE_SCALE = 0xFE;
 const uint8_t DEFAULT_MODE1 = 0x21;
 const uint8_t PRESCALER = 25000000 / 4096 / 50 - 1;
 const uint8_t SLEEP = 0x10;
-const uint8_t EXT_CLK = 1<<6;
-
+const uint8_t EXT_CLK = 1 << 6;
 
 const uint8_t LED0_OFF_L = 0x08;
 const uint8_t LED1_OFF_L = 0x0C;
@@ -36,16 +35,18 @@ const uint8_t MOTEUR_C = LED2_OFF_L;
 const uint8_t MOTEUR_D = LED3_OFF_L;
 const uint8_t MOTEUR_E = LED4_OFF_L;
 
-const int8_t ANGLE_MAX_MOTEUR_A =  90;
+const int8_t ANGLE_MAX_MOTEUR_A = 90;
 const int8_t ANGLE_MIN_MOTEUR_A = -90;
-const int8_t ANGLE_MAX_MOTEUR_B =  90;
+const int8_t ANGLE_MAX_MOTEUR_B = 90;
 const int8_t ANGLE_MIN_MOTEUR_B = -50;
-const int8_t ANGLE_MAX_MOTEUR_C =  90;
+const int8_t ANGLE_MAX_MOTEUR_C = 90;
 const int8_t ANGLE_MIN_MOTEUR_C = -90;
-const int8_t ANGLE_MAX_MOTEUR_D =  90;
+const int8_t ANGLE_MAX_MOTEUR_D = 90;
 const int8_t ANGLE_MIN_MOTEUR_D = -90;
-const int8_t ANGLE_MAX_MOTEUR_E =  90; //pince ouverte
-const int8_t ANGLE_MIN_MOTEUR_E = -90; //pince fermet
+const int8_t ANGLE_MAX_MOTEUR_E = 90;  // pince ouverte
+const int8_t ANGLE_MIN_MOTEUR_E = -90; // pince fermet
+
+
 
 struct pca9685
 {
@@ -60,22 +61,19 @@ struct pca9685
  */
 void initialisation();
 
-/** 
-* @brief fonction qui permet d'envoyer une donner à un registre  
-* 
-* @param registre [E] registre que l'on souhaite axée pour écrire une donnée 
-* @param data [E] donnée que l'on souhaite écrire  
-*/ 
+/**
+ * @brief fonction qui permet d'envoyer une donner à un registre
+ *
+ * @param registre [E] registre que l'on souhaite axée pour écrire une donnée
+ * @param data [E] donnée que l'on souhaite écrire
+ */
 void init_executeur(uint8_t registre, uint8_t data);
 
-
 /**
- * @brief 
- * 
- * @param moteur 
+ * @brief
+ *
+ * @param moteur
  */
 void mode1_envoie_de_donnees(pca9685 moteur);
 
-void envoi_n_donnee(uint8_t tableau_data[], uint8_t n);
-
-
+void envoi_n_donnee(int8_t tableau_data[], uint8_t n);
