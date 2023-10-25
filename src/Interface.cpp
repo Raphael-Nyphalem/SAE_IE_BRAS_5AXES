@@ -207,11 +207,11 @@ bool mode2_hardcoded_sequence(int8_t sequance)
     static uint32_t last_time = millis();
     uint32_t new_time = millis();
     uint32_t ecart = new_time - last_time;
-    int8_t tab[5];
+    int8_t tab[NB_MOTEUR];
     if (ecart >= 1500)
     {
 
-      for (uint8_t idx = 0; idx < 5; idx++)
+      for (uint8_t idx = 0; idx < NB_MOTEUR; idx++)
       {
         if (sequance ==1 )
         {
@@ -224,7 +224,7 @@ bool mode2_hardcoded_sequence(int8_t sequance)
         }
         
       }
-      envoi_n_donnee(tab, 5);
+      envoi_n_donnee(tab, NB_MOTEUR);
       i++;
       last_time = new_time;
       if (i >= nb_sequance)
@@ -243,7 +243,7 @@ bool selection_de_sequence(int8_t &sequance)
   static bool flag_print_seq = true;
   static bool flag_select_seq = false;
 
-  if (sequance == -1)
+  if (sequance == -1 && flag_select_seq == false)
   {
     flag_print_seq = true;
   }
