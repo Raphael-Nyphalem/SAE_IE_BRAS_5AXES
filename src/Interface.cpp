@@ -190,16 +190,16 @@ bool execution_sequence(int8_t sequence)
 {
   static uint8_t i = 0;
   bool quitter_mode_2 = false;
-  uint8_t nb_sequance;
+  uint8_t nb_sequence;
 
   if (sequence == 1)
   {
-    nb_sequance = SEQUENCE_1_NB_ETAT;
+    nb_sequence = SEQUENCE_1_NB_ETAT;
   }
 
   if (sequence == 2)
   {
-    nb_sequance = SEQUENCE_2_NB_ETAT;
+    nb_sequence = SEQUENCE_2_NB_ETAT;
   }
   
   if (sequence != -1)
@@ -227,7 +227,7 @@ bool execution_sequence(int8_t sequence)
       envoi_n_donnee(tab, NB_MOTEUR);
       i++;
       last_time = new_time;
-      if (i >= nb_sequance)
+      if (i >= nb_sequence)
       {
         i = 0;
         quitter_mode_2 = true;
