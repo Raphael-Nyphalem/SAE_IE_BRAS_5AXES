@@ -8,6 +8,11 @@ void setup()
   Serial.setTimeout(UINT16_MAX);
 
   initialisation();
+
+  //TEST N canaux
+  uint8_t nb_canaux = 2;
+  int8_t tab[nb_canaux] = {-90,90};
+  envoi_n_donnee(tab, nb_canaux);
   
 }
 
