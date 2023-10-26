@@ -9,6 +9,8 @@ void setup()
 
   initialisation();
 
+
+  /*
   // TEST 1 Canaux
   pca9685 led0;
   led0.adresse = LED0_OFF_L;
@@ -20,7 +22,7 @@ void setup()
   led8.adresse = LED8_OFF_L;
   led8.angle = 90;
   mode1_envoie_de_donnees(led8);
-
+  */
 
   /*
   //TEST N canaux
