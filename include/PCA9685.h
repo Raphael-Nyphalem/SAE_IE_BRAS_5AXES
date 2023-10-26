@@ -73,16 +73,17 @@ void initialisation();
 void init_executeur(uint8_t registre, uint8_t data);
 
 /**
- * @brief
+ * @brief fonction qui permet d'envoyer 
  *
- * @param moteur [E]
+ * @param moteur [E] 
  */
 void mode1_envoie_de_donnees(pca9685 moteur);
 
 /**
  * @brief 
  * 
- * @param tableau_data [E]
- * @param n [E]
+ * @param tableau_data [E] tableau des données a envoyer de taille n des valeur d'angle dans l'ordre des branchement en sur le PCA9685
+ * @param n [E] nombre de donnée dans le tableau_data
+ * 
  */
 void envoi_n_donnee(int8_t tableau_data[], uint8_t n);

@@ -9,10 +9,26 @@ void setup()
 
   initialisation();
 
+  // TEST 1 Canaux
+  pca9685 led0;
+  led0.adresse = LED0_OFF_L;
+  led0.angle = -90;
+
+  mode1_envoie_de_donnees(led0);
+
+  pca9685 led8;
+  led8.adresse = LED8_OFF_L;
+  led8.angle = 90;
+  mode1_envoie_de_donnees(led8);
+
+
+  /*
   //TEST N canaux
   uint8_t nb_canaux = 2;
   int8_t tab[nb_canaux] = {-90,90};
   envoi_n_donnee(tab, nb_canaux);
+  */
+
   
 }
 
