@@ -186,23 +186,23 @@ bool selection_de_mode(int8_t &mode)
   return retourne;
 }
 
-bool execution_sequence(int8_t sequance)
+bool execution_sequence(int8_t sequence)
 {
   static uint8_t i = 0;
   bool quitter_mode_2 = false;
   uint8_t nb_sequance;
 
-  if (sequance == 1)
+  if (sequence == 1)
   {
     nb_sequance = SEQUENCE_1_NB_ETAT;
   }
 
-  if (sequance == 2)
+  if (sequence == 2)
   {
     nb_sequance = SEQUENCE_2_NB_ETAT;
   }
   
-  if (sequance != -1)
+  if (sequence != -1)
   {
     static uint32_t last_time = millis();
     uint32_t new_time = millis();
@@ -213,12 +213,12 @@ bool execution_sequence(int8_t sequance)
 
       for (uint8_t idx = 0; idx < NB_MOTEUR; idx++)
       {
-        if (sequance ==1 )
+        if (sequence ==1 )
         {
           tab[idx] = SEQUENCE_1[i][idx];
         }
 
-        if (sequance == 2)
+        if (sequence == 2)
         {
           tab[idx] = SEQUENCE_2[i][idx];
         }
@@ -237,13 +237,13 @@ bool execution_sequence(int8_t sequance)
   return quitter_mode_2;
 }
 
-bool selection_de_sequence(int8_t &sequance)
+bool selection_de_sequence(int8_t &sequence)
 {
   bool quitter_mode_2 = false;
   static bool flag_print_seq = true;
   static bool flag_select_seq = false;
 
-  if (sequance == -1 && flag_select_seq == false)
+  if (sequence == -1 && flag_select_seq == false)
   {
     flag_print_seq = true;
   }
@@ -267,11 +267,11 @@ bool selection_de_sequence(int8_t &sequance)
     switch (lue)
     {
     case '1':
-      sequance = 1;
+      sequence = 1;
       break;
     
     case '2':
-      sequance = 2;
+      sequence = 2;
       break;
     
     case 'q':

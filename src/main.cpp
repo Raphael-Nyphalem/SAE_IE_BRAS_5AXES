@@ -56,17 +56,17 @@ void loop()
   if(mode ==2)
   {
     bool quitte_mode_2;
-    static int8_t sequance = -1;
-    quitte_mode_2 = selection_de_sequence(sequance);
+    static int8_t sequence = -1;
+    quitte_mode_2 = selection_de_sequence(sequence);
 
-    if (sequance > 0)
+    if (sequence > 0)
     {
-      quitte_mode_2 = execution_sequence( sequance );
+      quitte_mode_2 = execution_sequence( sequence );
     }
 
     if (quitte_mode_2)
     {
-      sequance = -1;
+      sequence = -1;
       mode =-1;
     }
     

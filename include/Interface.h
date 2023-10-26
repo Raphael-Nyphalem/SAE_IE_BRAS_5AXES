@@ -24,17 +24,17 @@ bool selection_de_mode(int8_t &mode);
  * @brief Permet l'exécution d'une séquence écrite dans 'sequences.h' sur le bras 5 axe, 
  *  cette fonction utilise la fonction envoi_n_donnee() de PCA9685
  * 
- * @param sequance [E] séquence que l'on souhaite exécute, lorsque la séquence est à -1 c'est qu'aucune n'a été sélectionnée
+ * @param sequence [E] séquence que l'on souhaite exécute, lorsque la séquence est à -1 c'est qu'aucune n'a été sélectionnée
  * @return true [S] retourne VRAIS si on souhaite quitte le mode de fonctionnement
  * @return false [S] retourne FAUX si on souhaite reste dans le mode de fonctionnement actuelle
  */
-bool execution_sequence(int8_t sequance);
+bool execution_sequence(int8_t sequence);
 
 /**
  * @brief 
  * 
- * @param sequance [E/S]
+ * @param sequence [E/S]
  * @return true [S] retourne VRAIS si on souhaite quitte le mode de fonctionnement
  * @return false [S] retourne FAUX si on souhaite reste dans le mode de fonctionnement actuelle
  */
-bool selection_de_sequence(int8_t &sequance);
+bool selection_de_sequence(int8_t &sequence);
