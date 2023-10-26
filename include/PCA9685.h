@@ -47,7 +47,10 @@ const int8_t ANGLE_MAX_MOTEUR_E = 90;  // pince ouverte
 const int8_t ANGLE_MIN_MOTEUR_E = -90; // pince fermet
 
 
-
+/**
+ * @brief 
+ * 
+ */
 struct pca9685
 {
   uint8_t adresse;
@@ -72,8 +75,14 @@ void init_executeur(uint8_t registre, uint8_t data);
 /**
  * @brief
  *
- * @param moteur
+ * @param moteur [E]
  */
 void mode1_envoie_de_donnees(pca9685 moteur);
 
+/**
+ * @brief 
+ * 
+ * @param tableau_data [E]
+ * @param n [E]
+ */
 void envoi_n_donnee(int8_t tableau_data[], uint8_t n);

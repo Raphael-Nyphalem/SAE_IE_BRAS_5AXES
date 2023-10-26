@@ -186,7 +186,7 @@ bool selection_de_mode(int8_t &mode)
   return retourne;
 }
 
-bool mode2_hardcoded_sequence(int8_t sequance)
+bool execution_sequence(int8_t sequance)
 {
   static uint8_t i = 0;
   bool quitter_mode_2 = false;

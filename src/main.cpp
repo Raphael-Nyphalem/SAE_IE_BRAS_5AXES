@@ -56,7 +56,7 @@ void loop()
 
     if (sequance > 0)
     {
-      quitte_mode_2 = mode2_hardcoded_sequence( sequance );
+      quitte_mode_2 = execution_sequence( sequance );
     }
 
     if (quitte_mode_2)
